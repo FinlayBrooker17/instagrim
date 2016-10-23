@@ -8,9 +8,154 @@ and open the template in the editor.
     Author     : Administrator
 */
 
+html{
+    color: rgb(20,20,20);
+}
 
+a{
+    color: rgb(20,20,20);
+}
 nav {
     text-align: left;
-    border: 2px;
+    border: black 2px solid;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 5px;
     float: right;
+    background-color:ivory;
+}
+nav ul{
+    list-style-type: none;
+    align-content: center;
+}
+
+nav li a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+header{
+    background-color:darkgray;
+    text-align: center;
+}
+
+body{
+    background-color: lightgray;
+    font-size: 3vmin;
+    font-family: "Arial Black",sans-serif;
+}
+
+article{
+    margin: 10px;
+}
+
+footer{
+    background-color: darkgray;
+}
+
+.tab{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.tab li{
+    float: left;
+    
+}
+
+.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#container{
+    width: 50%;
+    margin-bottom: 20%;
+}
+#profilepic{
+    width: 50%;
+    float: left;
+}
+#profilepic img{
+    width: 60%;
+}
+#profileinfo{
+    margin-left: 50%;
+}    
+
+#imagelistbox{
+   display: inline-block;   
+}
+
+
+#imagebox{
+    display: inline-block;
+    text-align: center;
+    width:50%;
+    margin-left: 25%;
+}
+
+#imagebox img{
+    width: 100%;
+}
+
+#commentInput{
+    width:50%;
+    margin-left: 25%;
+    text-align: center;
+}
+
+#commentText{
+    width: 80vmin;
+    height: 10vmin;
+}
+
+#Comments{
+    width:50%;
+    margin-left: 25%;
+    border: 1px solid black;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#comment{
+    width: 100%;
+    
+    border: 1px solid black;
+    /*
+    border-radius: 15px;*/
+    padding-left: 1vmin;
+    text-align: left;
+}
+#replyForm{
+    width: 75%;
+    margin-left: 25%;
+}
+
+#reply{
+    width: 90%;
+    margin-left: 10%;
+    border: 1px solid black;
+    padding-left: 1vmin;
+    text-align: left;
 }

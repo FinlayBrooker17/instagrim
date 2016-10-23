@@ -4,7 +4,6 @@ import java.net.URLDecoder;
 import java.util.StringTokenizer;
 //import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
-import com.eaio.uuid.UUID;
 
 public final class Convertors {
     public static int DISPLAY_IMAGE=0;

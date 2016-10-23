@@ -18,18 +18,15 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.utils.Bytes;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.UUID;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
@@ -154,7 +151,66 @@ public class PicModel {
 
             }
         }
+        session.close();
         return Pics;
+    }
+    
+    //// mine
+    // gets a list of all pictures on the database
+    public java.util.LinkedList<Pic> getAllPics() {
+        java.util.LinkedList<Pic> pics = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select picid from Pics");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        ));
+        if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            session.close();
+            return null;
+        } else {
+            for (Row row : rs) {
+                Pic pic = new Pic();
+                java.util.UUID UUID = row.getUUID("picid");
+                System.out.println("UUID" + UUID.toString());
+                pic.setUUID(UUID);
+                pics.add(pic);
+
+            }
+        }
+        session.close();
+        return pics;
+        
+    }
+    public String[] getPicInfo(UUID picid){
+        Session session = cluster.connect("instagrim");
+        String user;
+        String dateAdded;
+        String[] info = new String[2];
+        PreparedStatement ps = session.prepare("select user,interaction_time from Pics where picid =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        picid));
+        if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                
+                user = row.getString("user");
+                System.out.println("User" + user);
+                dateAdded = row.getDate("interaction_time").toString();
+                System.out.println("DateAdded" + dateAdded);
+                info[0] = user;
+                info[1] = dateAdded;
+            }
+        }
+        session.close();
+        return info;
     }
 
     public Pic getPic(int image_type, java.util.UUID picid) {
@@ -208,7 +264,8 @@ public class PicModel {
         session.close();
         Pic p = new Pic();
         p.setPic(bImage, length, type);
-
+        
+        session.close();
         return p;
 
     }

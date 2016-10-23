@@ -9,7 +9,6 @@ package uk.ac.dundee.computing.aec.instagrim.servlets;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,8 +49,11 @@ public class Register extends HttpServlet {
         
         User us=new User();
         us.setCluster(cluster);
-        us.RegisterUser(username, password);
-        
+        if(us.checkUsername(username)){
+            us.RegisterUser(username, password);
+        }else{
+            error("Username taken",response);
+        }
 	response.sendRedirect("/Instagrim");
         
     }
@@ -66,4 +68,14 @@ public class Register extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void error(String mess, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter out = null;
+        out = new PrintWriter(response.getOutputStream());
+        out.println("<h1>You have an error in your input</h1>");
+        out.println("<h2>" + mess + "</h2>");
+        out.close();
+        return;
+    }
+    
 }

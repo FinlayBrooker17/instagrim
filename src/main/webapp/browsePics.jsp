@@ -1,7 +1,7 @@
 <%-- 
-    Document   : UsersPics
-    Created on : Sep 24, 2014, 2:52:48 PM
-    Author     : Administrator
+    Document   : browsePics
+    Created on : 05-Oct-2016, 13:32:29
+    Author     : Finlay
 --%>
 
 <%@page import="java.util.*"%>
@@ -20,7 +20,7 @@
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         </header>
-        
+        <%LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");%>
         <nav>
             <ul>
 
@@ -28,7 +28,7 @@
                 <li><a href="/Instagrim/upload.jsp">Upload</a></li>
                     <%
                         
-                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        //LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
@@ -49,9 +49,8 @@
                     }%>
             </ul>
         </nav>
- 
-        <article>
-            <h1>Your Pics</h1>
+                <article>
+            <h1>See Pics</h1>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
@@ -66,11 +65,11 @@
 
         %>
         <div id="imagelistbox">
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+        <!--<a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>-->
+        <a href="/Instagrim/Comments/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
         </div>
         <%
 
-            
             }
             }
         %>

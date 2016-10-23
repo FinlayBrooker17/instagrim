@@ -12,6 +12,7 @@
     <head>
         <title>Instagrim</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
@@ -23,7 +24,8 @@
             <ul>
 
                
-                <li><a href="upload.jsp">Upload</a></li>
+                <li><a href="/Instagrim/upload.jsp">Upload</a></li>
+                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
                     <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -33,6 +35,10 @@
                     %>
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
+                <li><a href="/Instagrim/Images/*">Browse Images</a></li>
+                <li><a href="/Instagrim/Filter/<%=lg.getUsername()%>">Filters</a></li>
+                <li><a href="/Instagrim/Logout">Logout</a></li>
                     <%}
                             }else{
                                 %>
@@ -44,6 +50,7 @@
                     }%>
             </ul>
         </nav>
+            
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
